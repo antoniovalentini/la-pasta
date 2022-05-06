@@ -1,6 +1,6 @@
 # La pasta e-commerce
 
-<p style="text-align: center; margin: 0 auto">
+<p align="center">
   <img width="253" height="160" src="./docs/farfalle_logo.png" alt="Farfalle pasta logo">
 </p>
 
