@@ -1,1 +1,1 @@
-# La pasta e-Commerce
+# La pasta e-commerce
