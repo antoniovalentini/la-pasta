@@ -1,4 +1,6 @@
+using LaPasta.Apis.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaPasta.Apis.Controllers;
 
@@ -6,26 +8,20 @@ namespace LaPasta.Apis.Controllers;
 [Route("[controller]")]
 public class OrdersController : ControllerBase
 {
-    private static readonly string[] Pasta = {
-        "Fusilli", "Spaghetti", "Rigatoni", "Penne", "Farfalle", "Tortiglioni", "Paccheri", "Orecchiette", "Trofie"
-    };
-
     private readonly ILogger<OrdersController> _logger;
+    private readonly ApiDbContext _dbContext;
 
-    public OrdersController(ILogger<OrdersController> logger)
+    public OrdersController(ILogger<OrdersController> logger, ApiDbContext dbContext)
     {
         _logger = logger;
+        _dbContext = dbContext;
     }
 
     [HttpGet("GetOrders")]
-    public IEnumerable<Order> Get()
+    public async Task<IEnumerable<Order>> Get()
     {
         _logger.LogInformation("Start GetOrder");
-        var items = Enumerable.Range(1, Random.Shared.Next(2, 4))
-            .Select(_ => new OrderItem(Pasta[Random.Shared.Next(0, Pasta.Length)], Random.Shared.Next(1, 10)));
-        var orders = Enumerable.Range(1, Random.Shared.Next(2, 5))
-            .Select(index => new Order(index.ToString(), TheUser.UserId, items, (OrderStatus)Random.Shared.Next(0, 3)))
-            .ToArray();
+        var orders = await _dbContext.Orders.Where(o => o.UserId == TheUser.UserId).Include(o => o.Items).ToListAsync();
         _logger.LogInformation("End GetOrder");
         return orders;
     }

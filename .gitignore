@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Custom files
+Database.db-*
 .idea/
 appsettings.Development.json
 appsettings.local.json

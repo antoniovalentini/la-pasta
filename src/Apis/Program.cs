@@ -1,4 +1,9 @@
+using LaPasta.Apis.Persistence;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApiDbContext>(options => options.UseSqlite("Data Source=Database.db"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
