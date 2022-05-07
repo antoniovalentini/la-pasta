@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LaPasta.Apis.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class OrdersController : ControllerBase
 {
     private readonly ILogger<OrdersController> _logger;
@@ -17,12 +17,12 @@ public class OrdersController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpGet("GetOrders")]
-    public async Task<IEnumerable<Order>> Get()
+    [HttpGet]
+    public async Task<IEnumerable<Order>> GetOrders()
     {
-        _logger.LogInformation("Start GetOrder");
+        _logger.LogInformation("Start {Method}", nameof(GetOrders));
         var orders = await _dbContext.Orders.Where(o => o.UserId == TheUser.UserId).Include(o => o.Items).ToListAsync();
-        _logger.LogInformation("End GetOrder");
+        _logger.LogInformation("End {Method}", nameof(GetOrders));
         return orders;
     }
 }
