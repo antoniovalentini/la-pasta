@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LaPasta.Apis.Persistence;
 
 public class Order
@@ -21,7 +23,23 @@ public class Order
     public OrderStatus Status { get; init; }
 }
 
-public record OrderItem(string Id, int Quantity, string Price);
+public class OrderItem
+{
+    public OrderItem(string productId, string orderId, int quantity, string actualProductPrice)
+    {
+        ProductId = productId;
+        OrderId = orderId;
+        Quantity = quantity;
+        ActualProductPrice = actualProductPrice;
+    }
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public string Id { get; init; } = null!;
+    public string ProductId { get; init; }
+    public int Quantity { get; init; }
+    public string ActualProductPrice { get; init; }
+    public string OrderId { get; init; }
+}
 
 public enum OrderStatus
 {

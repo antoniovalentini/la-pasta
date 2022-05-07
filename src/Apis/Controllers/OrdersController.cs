@@ -25,4 +25,39 @@ public class OrdersController : ControllerBase
         _logger.LogInformation("End {Method}", nameof(GetOrders));
         return orders;
     }
+
+    [HttpPost]
+    public async Task<ActionResult<PostOrdersResponse>> PostOrders(PostOrdersRequest request)
+    {
+        if (request.Order is null)
+        {
+            return BadRequest("Order cannot be null.");
+        }
+
+        if (request.Order.Products is not { Count: > 0})
+        {
+            return BadRequest("Order products cannot be empty.");
+        }
+
+        var orderId = Guid.NewGuid().ToString();
+        var items = request.Order.Products
+            .Select(p => new OrderItem(p.Id, orderId, p.Quantity, _dbContext.Products.Single(p1 => p1.Id == p.Id).Price))
+            .ToList();
+        var order = new Order(
+            orderId,
+            TheUser.UserId,
+            items,
+            items.Sum(i => i.Quantity * long.Parse(i.ActualProductPrice)).ToString(),
+            OrderStatus.InProgress);
+
+        var result = await _dbContext.Orders.AddAsync(order);
+        await _dbContext.SaveChangesAsync();
+
+        return new PostOrdersResponse(result.Entity);
+    }
 }
+
+public record OrderDto(List<ProductDto>? Products);
+public record ProductDto(string Id, int Quantity);
+public record PostOrdersRequest(OrderDto? Order);
+public record PostOrdersResponse(Order Order);
