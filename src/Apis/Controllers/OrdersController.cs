@@ -55,6 +55,6 @@ public class OrdersController : ControllerBase
 
 public record OrderDto(string OrderId, string Total, string Status, List<OrderItemDto>? Products);
 public record OrderItemDto(string ProductId, string Description, int Quantity, string ActualProductPrice);
-public record ProductDto(string Id, int Quantity);
-public record PostOrdersRequestDto(List<ProductDto>? Products);
+public record BasicProductDto(string Id, int Quantity);
+public record PostOrdersRequestDto(List<BasicProductDto>? Products);
 public record PostOrdersResponseDto(string OrderId);
