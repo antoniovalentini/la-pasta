@@ -36,9 +36,9 @@ public class OrderItem
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; init; } = null!;
     public string ProductId { get; init; }
+    public string OrderId { get; init; }
     public int Quantity { get; init; }
     public string ActualProductPrice { get; init; }
-    public string OrderId { get; init; }
 }
 
 public enum OrderStatus
