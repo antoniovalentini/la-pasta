@@ -1,0 +1,26 @@
+﻿@page
+@model LaPasta.FrontendRazor.Pages.IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+    <div class="container">
+      <div class="row">
+          @foreach (var p in Model.Products)
+        {
+            <div class="col">
+                <div class="card mt-5" style="width: 18rem;">
+                    <img src="./images/@(p.Id).jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@p.Name</h5>
+                        <p class="card-text">@p.Description</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        }
+      </div>
+    </div>
+</div>
