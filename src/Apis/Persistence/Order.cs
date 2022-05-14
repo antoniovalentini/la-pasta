@@ -25,18 +25,20 @@ public class Order
 
 public class OrderItem
 {
-    public OrderItem(string productId, string orderId, int quantity, string actualProductPrice)
+    public OrderItem(string productId, string orderId, int quantity, string actualProductPrice, string description)
     {
         ProductId = productId;
         OrderId = orderId;
         Quantity = quantity;
         ActualProductPrice = actualProductPrice;
+        Description = description;
     }
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public string Id { get; init; } = null!;
     public string ProductId { get; init; }
     public string OrderId { get; init; }
+    public string Description { get; init; }
     public int Quantity { get; init; }
     public string ActualProductPrice { get; init; }
 }

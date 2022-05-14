@@ -30,9 +30,9 @@ public class DbSeed
         var orderId = Guid.NewGuid().ToString();
         var items = new List<OrderItem>
         {
-            new(Products[0].Id, orderId, Random.Shared.Next(0, 10), Products[0].Price),
-            new(Products[1].Id, orderId, Random.Shared.Next(0, 10), Products[1].Price),
-            new(Products[2].Id, orderId, Random.Shared.Next(0, 10), Products[2].Price),
+            new(Products[0].Id, orderId, Random.Shared.Next(0, 10), Products[0].Price, Products[0].Description),
+            new(Products[1].Id, orderId, Random.Shared.Next(0, 10), Products[1].Price, Products[1].Description),
+            new(Products[2].Id, orderId, Random.Shared.Next(0, 10), Products[2].Price, Products[2].Description),
         };
 
         var order = new Order(orderId, TheUser.UserId, items, "180,11", OrderStatus.InProgress);
@@ -41,9 +41,9 @@ public class DbSeed
         orderId = Guid.NewGuid().ToString();
         items = new List<OrderItem>
         {
-            new(Products[3].Id, orderId, Random.Shared.Next(0, 10), Products[3].Price),
-            new(Products[4].Id, orderId, Random.Shared.Next(0, 10), Products[4].Price),
-            new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price),
+            new(Products[3].Id, orderId, Random.Shared.Next(0, 10), Products[3].Price, Products[3].Description),
+            new(Products[4].Id, orderId, Random.Shared.Next(0, 10), Products[4].Price, Products[4].Description),
+            new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price, Products[5].Description),
         };
         order = new Order(orderId, TheUser.UserId, items, "99,99", OrderStatus.Blocked);
         await _dbContext.Orders.AddAsync(order);
