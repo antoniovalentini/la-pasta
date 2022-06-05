@@ -7,10 +7,12 @@ namespace LaPasta.FrontendRazor.Pages;
 public class CartModel : PageModel
 {
     public Cart Cart { get; set; } = new();
+    public decimal Total { get; set; } = 0;
 
     public void OnGet()
     {
         Cart = HttpContext.Session.GetObjectFromJson<Cart>(SessionHelper.CartSessionId) ?? new Cart();
+        Total = Cart.Items.Sum(i => decimal.Parse(i.Product.Price));
     }
 
     public IActionResult OnPostDelete(string id)
