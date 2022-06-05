@@ -2,7 +2,7 @@
 
 public static class DbSeed
 {
-    private static readonly Product[] Products = {
+    public static readonly Product[] Products = {
         new("1", "Fusilli",     "Descrizione Fusilli",     "5"),
         new("2", "Spaghetti",   "Descrizione Spaghetti",   "6"),
         new("3", "Rigatoni",    "Descrizione Rigatoni",    "4"),

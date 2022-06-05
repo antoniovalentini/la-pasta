@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
+using LaPasta.Apis.Dtos;
+using LaPasta.Apis.Persistence;
 using Xunit;
 
 namespace LaPasta.Apis.IntegrationTests.Controllers;
@@ -25,6 +29,8 @@ public class ProductsControllerTests : IClassFixture<CustomWebApplicationFactory
 
         // Assert
         response.IsSuccessStatusCode.Should().BeTrue(content);
-        response.EnsureSuccessStatusCode();
+
+        var products = JsonSerializer.Deserialize<IEnumerable<FullProductDto>>(content);
+        products.Should().HaveCount(DbSeed.Products.Length);
     }
 }
