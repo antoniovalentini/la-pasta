@@ -17,7 +17,7 @@ public class CartModel : PageModel
     {
         Cart = HttpContext.Session.GetObjectFromJson<Cart>(SessionHelper.CartSessionId) ?? new Cart();
         if (Cart.Items is not {Count: > 0}) return RedirectToPage();
-        Cart.Items.RemoveAll(i => i.Id == id);
+        Cart.Items.RemoveAll(i => i.ItemId == id);
         HttpContext.Session.SetObjectAsJson(SessionHelper.CartSessionId, Cart);
 
         return RedirectToPage();
@@ -26,5 +26,7 @@ public class CartModel : PageModel
 
 public class Cart
 {
-    public List<FullProductDto> Items { get; } = new();
+    public List<CartItem> Items { get; init; } = new();
 }
+
+public record CartItem(string ItemId, FullProductDto Product);

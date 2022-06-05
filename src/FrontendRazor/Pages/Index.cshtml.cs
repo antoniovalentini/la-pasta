@@ -38,7 +38,7 @@ public class IndexModel : PageModel
             throw new Exception($"Invalid product id: '{id}'");
         }
         var cart = HttpContext.Session.GetObjectFromJson<Cart>(SessionHelper.CartSessionId) ?? new Cart();
-        cart.Items.Add(product);
+        cart.Items.Add(new CartItem(Guid.NewGuid().ToString(),product));
         HttpContext.Session.SetObjectAsJson(SessionHelper.CartSessionId, cart);
         Message = $"{product.Name} was added to your cart";
         return RedirectToPage();

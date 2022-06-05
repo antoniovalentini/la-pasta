@@ -5,6 +5,7 @@ namespace LaPasta.FrontendRazor;
 public static class SessionHelper
 {
     public const string CartSessionId = "CART";
+
     public static void SetObjectAsJson(this ISession session, string key, object value)
     {
         var serialized = JsonSerializer.Serialize(value);
