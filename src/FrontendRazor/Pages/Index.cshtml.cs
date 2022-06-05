@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using LaPasta.Apis.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LaPasta.FrontendRazor.Pages;
@@ -9,10 +10,17 @@ public class IndexModel : PageModel
     public List<FullProductDto> Products { get; set; }
 
     private readonly ILogger<IndexModel> _logger;
+    private readonly HttpClient _httpClient;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    [TempData]
+    public string? Message { get; set; }
+
+    public bool HasMessage => !string.IsNullOrEmpty(Message);
+
+    public IndexModel(ILogger<IndexModel> logger, IHttpClientFactory factory)
     {
         _logger = logger;
+        _httpClient = factory.CreateClient("backend");
         Products = new List<FullProductDto>();
     }
 
@@ -21,7 +29,7 @@ public class IndexModel : PageModel
         Products = await FetchProducts();
     }
 
-    public async Task OnPost(string id)
+    public async Task<IActionResult> OnPost(string id)
     {
         Products = await FetchProducts();
         var product = Products.FirstOrDefault(p => p.Id == id);
@@ -32,12 +40,13 @@ public class IndexModel : PageModel
         var cart = HttpContext.Session.GetObjectFromJson<Cart>(SessionHelper.CartSessionId) ?? new Cart();
         cart.Items.Add(product);
         HttpContext.Session.SetObjectAsJson(SessionHelper.CartSessionId, cart);
+        Message = $"{product.Name} was added to your cart";
+        return RedirectToPage();
     }
 
     private async Task<List<FullProductDto>> FetchProducts()
     {
-        var httpClient = new HttpClient {BaseAddress = new Uri("http://localhost:5008/")};
-        var response = await httpClient.GetAsync("api/Products");
+        var response = await _httpClient.GetAsync("api/Products");
         if (!response.IsSuccessStatusCode)
         {
             var ex1 = new Exception("Unable to fetch products.");
