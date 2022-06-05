@@ -1,0 +1,42 @@
+﻿@page
+@model LaPasta.FrontendRazor.Pages.Orders
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+
+    @if (Model.OrdersList is { Length: >0 })
+    {
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var order in Model.OrdersList)
+                    {
+                        <tr>
+                            <td>@order.PurchaseDate</td>
+                            <td>&euro; @order.Total</td>
+                            <td>@order.Status</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No orders.</p>
+    }
+
+</div>

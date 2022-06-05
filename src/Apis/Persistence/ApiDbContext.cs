@@ -8,7 +8,7 @@ public class ApiDbContext : DbContext
     {
         // Database.EnsureDeleted();
         // Database.EnsureCreated();
-        // new DbSeed(this).PopulateDb().GetAwaiter().GetResult();
+        // DbSeed.PopulateDb(this).GetAwaiter().GetResult();
     }
 
     public DbSet<Order> Orders => Set<Order>();

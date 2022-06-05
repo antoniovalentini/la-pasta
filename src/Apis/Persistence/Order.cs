@@ -7,13 +7,14 @@ public class Order
     // Used by EF
     public Order() { }
 
-    public Order(string orderId, string userId, List<OrderItem> items, string total, OrderStatus status)
+    public Order(string orderId, string userId, List<OrderItem> items, string total, OrderStatus status, DateTime purchaseDate)
     {
         OrderId = orderId;
         UserId = userId;
         Items = items;
         Total = total;
         Status = status;
+        PurchaseDate = purchaseDate;
     }
 
     public string OrderId { get; init; } = null!;
@@ -21,6 +22,7 @@ public class Order
     public List<OrderItem> Items { get; init; } = null!;
     public string Total { get; init; } = null!;
     public OrderStatus Status { get; init; }
+    public DateTime PurchaseDate { get; init; }
 }
 
 public class OrderItem

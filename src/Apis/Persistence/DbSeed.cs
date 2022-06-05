@@ -28,7 +28,7 @@ public static class DbSeed
             new(Products[2].Id, orderId, Random.Shared.Next(0, 10), Products[2].Price, Products[2].Description),
         };
 
-        var order = new Order(orderId, TheUser.UserId, items, "180,11", OrderStatus.InProgress);
+        var order = new Order(orderId, TheUser.UserId, items, "180,11", OrderStatus.InProgress, DateTime.UtcNow.AddDays(-300));
         await dbContext.Orders.AddAsync(order);
 
         orderId = Guid.NewGuid().ToString();
@@ -38,7 +38,7 @@ public static class DbSeed
             new(Products[4].Id, orderId, Random.Shared.Next(0, 10), Products[4].Price, Products[4].Description),
             new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price, Products[5].Description),
         };
-        order = new Order(orderId, TheUser.UserId, items, "99,99", OrderStatus.Blocked);
+        order = new Order(orderId, TheUser.UserId, items, "99,99", OrderStatus.Blocked, DateTime.UtcNow.AddDays(-800));
         await dbContext.Orders.AddAsync(order);
         await dbContext.SaveChangesAsync();
     }

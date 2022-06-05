@@ -23,7 +23,7 @@ public class OrdersController : ControllerBase
 
         return orders.Select(o =>
             new OrderDto(
-                o.OrderId, o.Total, o.Status.ToString(),
+                o.OrderId, o.Total, o.Status.ToString(), o.PurchaseDate,
                 o.Items.Select(i =>
                     new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
     }
@@ -45,7 +45,8 @@ public class OrdersController : ControllerBase
             TheUser.UserId,
             items,
             items.Sum(i => i.Quantity * long.Parse(i.ActualProductPrice)).ToString(),
-            OrderStatus.InProgress);
+            OrderStatus.InProgress,
+            DateTime.UtcNow);
 
         var result = await _dbContext.Orders.AddAsync(order);
         await _dbContext.SaveChangesAsync();
