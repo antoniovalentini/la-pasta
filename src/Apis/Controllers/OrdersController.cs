@@ -21,8 +21,11 @@ public class OrdersController : ControllerBase
     {
         var orders = await _dbContext.Orders.Where(o => o.UserId == TheUser.UserId).Include(o => o.Items).ToListAsync();
 
-        return orders.Select(o => new OrderDto(o.OrderId, o.Total, o.Status.ToString(),
-            o.Items.Select(i => new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
+        return orders.Select(o =>
+            new OrderDto(
+                o.OrderId, o.Total, o.Status.ToString(),
+                o.Items.Select(i =>
+                    new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
     }
 
     [HttpPost]
