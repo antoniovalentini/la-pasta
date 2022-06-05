@@ -26,3 +26,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Necessary for internal visibility in integration tests
+public partial class Program
+{
+
+}
