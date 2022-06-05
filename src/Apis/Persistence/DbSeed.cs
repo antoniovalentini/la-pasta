@@ -1,14 +1,7 @@
 ﻿namespace LaPasta.Apis.Persistence;
 
-public class DbSeed
+public static class DbSeed
 {
-    private readonly ApiDbContext _dbContext;
-
-    public DbSeed(ApiDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     private static readonly Product[] Products = {
         new("1", "Fusilli",     "Descrizione Fusilli",     "5"),
         new("2", "Spaghetti",   "Descrizione Spaghetti",   "6"),
@@ -21,10 +14,10 @@ public class DbSeed
         new("9", "Trofie",      "Descrizione Trofie",      "4"),
     };
 
-    public async Task PopulateDb()
+    public static async Task PopulateDb(ApiDbContext dbContext)
     {
         // Seed products
-        await _dbContext.Products.AddRangeAsync(Products);
+        await dbContext.Products.AddRangeAsync(Products);
 
         // Seed orders
         var orderId = Guid.NewGuid().ToString();
@@ -36,7 +29,7 @@ public class DbSeed
         };
 
         var order = new Order(orderId, TheUser.UserId, items, "180,11", OrderStatus.InProgress);
-        await _dbContext.Orders.AddAsync(order);
+        await dbContext.Orders.AddAsync(order);
 
         orderId = Guid.NewGuid().ToString();
         items = new List<OrderItem>
@@ -46,7 +39,7 @@ public class DbSeed
             new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price, Products[5].Description),
         };
         order = new Order(orderId, TheUser.UserId, items, "99,99", OrderStatus.Blocked);
-        await _dbContext.Orders.AddAsync(order);
-        await _dbContext.SaveChangesAsync();
+        await dbContext.Orders.AddAsync(order);
+        await dbContext.SaveChangesAsync();
     }
 }
