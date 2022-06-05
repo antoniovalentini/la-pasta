@@ -6,13 +6,7 @@ namespace LaPasta.FrontendRazor.Pages;
 
 public class CartModel : PageModel
 {
-    private readonly ILogger<CartModel> _logger;
-    public Cart Cart { get; set; } = new Cart();
-
-    public CartModel(ILogger<CartModel> logger)
-    {
-        _logger = logger;
-    }
+    public Cart Cart { get; set; } = new();
 
     public void OnGet()
     {
@@ -32,5 +26,5 @@ public class CartModel : PageModel
 
 public class Cart
 {
-    public List<FullProductDto> Items { get; set; } = new();
+    public List<FullProductDto> Items { get; } = new();
 }
