@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using LaPasta.Apis.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LaPasta.FrontendRazor.Pages;
@@ -9,6 +10,10 @@ public class Orders : PageModel
     private readonly HttpClient _httpClient;
 
     public OrderDto[] OrdersList { get; set; } = Array.Empty<OrderDto>();
+
+    [TempData]
+    public string? Message { get; set; }
+    public bool HasMessage => !string.IsNullOrEmpty(Message);
 
     public Orders(IHttpClientFactory factory)
     {
@@ -28,7 +33,7 @@ public class Orders : PageModel
 
         if (orders is {Length: > 0})
         {
-            OrdersList = orders;
+            OrdersList = orders.OrderByDescending(o => o.PurchaseDate).ToArray();
         }
     }
 }
