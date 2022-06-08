@@ -1,4 +1,3 @@
-﻿# dependabot for nuget
 version: 2
 updates:
   - package-ecosystem: nuget
