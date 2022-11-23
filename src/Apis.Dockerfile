@@ -2,8 +2,11 @@
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-COPY . /src
-WORKDIR /src
+
+COPY ./src/Dtos /src/Dtos
+COPY ./src/Apis /src/Apis
+
+WORKDIR /src/Apis
 RUN ls
 RUN dotnet build "Apis.csproj" -c Release -o /app/build
 

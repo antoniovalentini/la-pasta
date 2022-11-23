@@ -1,4 +1,4 @@
-using LaPasta.Apis.Dtos;
+using LaPasta.Apis.Dto;
 using LaPasta.Apis.Persistence;
 using LaPasta.Apis.Users;
 using Microsoft.AspNetCore.Mvc;

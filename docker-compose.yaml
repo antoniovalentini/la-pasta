@@ -1,5 +1,17 @@
 ﻿services:
+
   api:
-    build: src/Apis
+    build:
+      dockerfile: ./src/Apis.Dockerfile
     ports:
       - 5008:80
+
+  frontend:
+    build:
+      dockerfile: ./src/Frontend.Dockerfile
+    ports:
+      - 5147:80
+    volumes:
+      - ./:/root/.aspnet/DataProtection-Keys
+
+

@@ -1,4 +1,4 @@
-using LaPasta.Apis.Dtos;
+using LaPasta.Apis.Dto;
 using LaPasta.Apis.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +21,12 @@ public class ProductsController : ControllerBase
     {
         var orders = await _dbContext.Products.ToListAsync();
 
-        return orders.Select(FullProductDto.FromEntity);
+        return orders.Select(x => x.ToDto());
     }
+}
+
+public static class DtoExtensions
+{
+    public static FullProductDto ToDto(this Product entity)
+        => new(entity.Id, entity.Name, entity.Description, entity.Price);
 }
