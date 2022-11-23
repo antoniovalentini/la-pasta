@@ -1,5 +1,6 @@
 using LaPasta.Apis.Dtos;
 using LaPasta.Apis.Persistence;
+using LaPasta.Apis.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,16 +11,19 @@ namespace LaPasta.Apis.Controllers;
 public class OrdersController : ControllerBase
 {
     private readonly ApiDbContext _dbContext;
+    private readonly IUserIdentityProvider _userIdentityProvider;
 
-    public OrdersController(ApiDbContext dbContext)
+    public OrdersController(ApiDbContext dbContext, IUserIdentityProvider userIdentityProvider)
     {
         _dbContext = dbContext;
+        _userIdentityProvider = userIdentityProvider;
     }
 
     [HttpGet]
     public async Task<IEnumerable<OrderDto>> GetOrders()
     {
-        var orders = await _dbContext.Orders.Where(o => o.UserId == TheUser.UserId).Include(o => o.Items).ToListAsync();
+        var userId = await _userIdentityProvider.GetCurrentUserIdAsync();
+        var orders = await _dbContext.Orders.Where(o => o.UserId == userId).Include(o => o.Items).ToListAsync();
 
         return orders.Select(o =>
             new OrderDto(
@@ -36,13 +40,14 @@ public class OrdersController : ControllerBase
             return BadRequest("Order products cannot be empty.");
         }
 
+        var userId = await _userIdentityProvider.GetCurrentUserIdAsync();
         var orderId = Guid.NewGuid().ToString();
         var items = requestDto.Products
             .Select(p => new OrderItem(p.Id, orderId, p.Quantity, _dbContext.Products.Single(p1 => p1.Id == p.Id).Price, _dbContext.Products.Single(p1 => p1.Id == p.Id).Description))
             .ToList();
         var order = new Order(
             orderId,
-            TheUser.UserId,
+            userId,
             items,
             items.Sum(i => i.Quantity * long.Parse(i.ActualProductPrice)).ToString(),
             OrderStatus.InProgress,
