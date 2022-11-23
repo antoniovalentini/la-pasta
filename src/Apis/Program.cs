@@ -11,18 +11,22 @@ builder.Services.AddSingleton<IUserIdentityProvider, TestUserIdentityProvider>()
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+app.MapHealthChecks("/health");
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-else
-{
-    app.UseHttpsRedirection();
-}
+// else
+// {
+    // disable until we figure out how to trust certificates in docker
+    // app.UseHttpsRedirection();
+// }
 
 app.UseAuthorization();
 

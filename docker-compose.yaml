@@ -1,0 +1,5 @@
+﻿services:
+  api:
+    build: src/Apis
+    ports:
+      - 5008:80
