@@ -15,8 +15,6 @@
       dockerfile: ./src/Frontend.Dockerfile
     ports:
       - 5147:5147
-    volumes:
-      - ./:/root/.aspnet/DataProtection-Keys
     networks:
       - my-network
     environment:
