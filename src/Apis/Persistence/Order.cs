@@ -47,8 +47,8 @@ public class OrderItem
 
 public enum OrderStatus
 {
-    InProgress,
-    Shipped,
-    Received,
-    Blocked,
+    InProgress = 0,
+    Shipped = 1,
+    Delivered = 2,
+    Blocked = 3,
 }
