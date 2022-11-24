@@ -1,4 +1,4 @@
-﻿namespace LaPasta.Apis.Users;
+﻿namespace LaPasta.Api.Users;
 
 public interface IUserIdentityProvider
 {

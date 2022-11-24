@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using LaPasta.Api.Dtos;
-using LaPasta.Apis.Persistence;
+using LaPasta.Api.Persistence;
 using Xunit;
 
 namespace LaPasta.Apis.IntegrationTests.Controllers;

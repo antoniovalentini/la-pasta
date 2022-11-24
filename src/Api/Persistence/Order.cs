@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LaPasta.Apis.Persistence;
+namespace LaPasta.Api.Persistence;
 
 public class Order
 {

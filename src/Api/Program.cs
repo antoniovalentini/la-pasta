@@ -1,5 +1,5 @@
-using LaPasta.Apis.Persistence;
-using LaPasta.Apis.Users;
+using LaPasta.Api.Persistence;
+using LaPasta.Api.Users;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

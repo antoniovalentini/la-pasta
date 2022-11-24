@@ -1,4 +1,4 @@
-﻿namespace LaPasta.Apis.Persistence;
+﻿namespace LaPasta.Api.Persistence;
 
 public class Product
 {

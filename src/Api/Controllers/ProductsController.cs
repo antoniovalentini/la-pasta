@@ -1,9 +1,9 @@
 using LaPasta.Api.Dtos;
-using LaPasta.Apis.Persistence;
+using LaPasta.Api.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace LaPasta.Apis.Controllers;
+namespace LaPasta.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

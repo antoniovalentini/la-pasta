@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace LaPasta.Apis.Persistence;
+namespace LaPasta.Api.Persistence;
 
 public class ApiDbContext : DbContext
 {

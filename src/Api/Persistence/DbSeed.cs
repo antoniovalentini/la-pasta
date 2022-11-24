@@ -1,6 +1,6 @@
-﻿using LaPasta.Apis.Users;
+﻿using LaPasta.Api.Users;
 
-namespace LaPasta.Apis.Persistence;
+namespace LaPasta.Api.Persistence;
 
 public static class DbSeed
 {
