@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
-using LaPasta.Apis.Dto;
+using LaPasta.Api.Dtos;
 using LaPasta.Apis.Persistence;
 using Xunit;
 

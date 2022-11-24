@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using LaPasta.Apis.Dto;
+using LaPasta.Api.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
