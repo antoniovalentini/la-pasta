@@ -9,6 +9,24 @@ Those are the reasons why I'm doing this small Pasta e-commerce.
 
 This project has a very simple goal: selling Pasta. But we'll do it in the most over-engineered way possible. because why not.
 
+## Run locally using Docker
+
+Prerequisites:
+- [docker](https://docs.docker.com/get-docker/)
+- [docker-compose](https://docs.docker.com/compose/install/)
+
+From the root folder, start all the containers by running:
+```shell
+$ docker-compose up
+```
+
+The frontend should be accessible at http://localhost:5147 while the backend at http://localhost:5008/.
+
+To remove containers, images and the new network, just run:
+```shell
+$ docker-compose down --rmi all
+```
+
 ## Architecture and functionalities
 
 <p align="center">
