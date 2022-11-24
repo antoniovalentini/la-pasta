@@ -12,7 +12,7 @@
 
   frontend:
     build:
-      dockerfile: ./src/Frontend.Dockerfile
+      dockerfile: ./src/Frontend.Razor.Dockerfile
     ports:
       - 5147:5147
     networks:
