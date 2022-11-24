@@ -2,7 +2,7 @@
 
   api:
     build:
-      dockerfile: ./src/Apis.Dockerfile
+      dockerfile: ./src/Api.Dockerfile
     ports:
       - 5008:5008
     networks:

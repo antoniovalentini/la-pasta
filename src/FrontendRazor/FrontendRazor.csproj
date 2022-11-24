@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dtos\Dtos.csproj" />
+      <ProjectReference Include="..\Api.Dtos\Api.Dtos.csproj" />
     </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{054BE8B6-E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apis.IntegrationTests", "test\Apis.IntegrationTests\Apis.IntegrationTests.csproj", "{D82B23B0-06D9-4A85-8989-67999AFD0C8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "src\Dtos\Dtos.csproj", "{DBAB0738-46C0-4EA9-9086-18C816348948}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Dtos", "src\Api.Dtos\Api.Dtos.csproj", "{DBAB0738-46C0-4EA9-9086-18C816348948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

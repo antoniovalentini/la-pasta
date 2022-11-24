@@ -3,7 +3,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
-COPY ./src/Dtos /src/Dtos
+COPY ./src/Api.Dtos /src/Api.Dtos
 COPY ./src/FrontendRazor /src/FrontendRazor
 
 WORKDIR /src/FrontendRazor
