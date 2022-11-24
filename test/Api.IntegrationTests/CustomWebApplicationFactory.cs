@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using LaPasta.Api;
 using LaPasta.Api.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -9,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace LaPasta.Apis.IntegrationTests;
+namespace LaPasta.Api.IntegrationTests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {

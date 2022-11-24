@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98126842-C2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{054BE8B6-E0D6-465A-852F-382418C869B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apis.IntegrationTests", "test\Apis.IntegrationTests\Apis.IntegrationTests.csproj", "{D82B23B0-06D9-4A85-8989-67999AFD0C8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.IntegrationTests", "test\Api.IntegrationTests\Api.IntegrationTests.csproj", "{D82B23B0-06D9-4A85-8989-67999AFD0C8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Dtos", "src\Api.Dtos\Api.Dtos.csproj", "{DBAB0738-46C0-4EA9-9086-18C816348948}"
 EndProject

@@ -6,7 +6,7 @@
 
         <IsPackable>false</IsPackable>
 
-        <RootNamespace>LaPasta.Apis.IntegrationTests</RootNamespace>
+        <RootNamespace>LaPasta.Api.IntegrationTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

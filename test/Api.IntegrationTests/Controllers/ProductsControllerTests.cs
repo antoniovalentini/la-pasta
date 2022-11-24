@@ -6,7 +6,7 @@ using LaPasta.Api.Dtos;
 using LaPasta.Api.Persistence;
 using Xunit;
 
-namespace LaPasta.Apis.IntegrationTests.Controllers;
+namespace LaPasta.Api.IntegrationTests.Controllers;
 
 public class ProductsControllerTests : IClassFixture<CustomWebApplicationFactory>
 {
