@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace LaPasta.FrontendRazor;
+namespace LaPasta.Frontend.Razor;
 
 public static class SessionHelper
 {

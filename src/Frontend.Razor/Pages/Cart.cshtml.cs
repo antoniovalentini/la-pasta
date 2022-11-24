@@ -5,7 +5,7 @@ using LaPasta.Apis.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LaPasta.FrontendRazor.Pages;
+namespace LaPasta.Frontend.Razor.Pages;
 
 public class CartModel : PageModel
 {
