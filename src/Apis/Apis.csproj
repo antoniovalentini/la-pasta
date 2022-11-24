@@ -16,4 +16,11 @@
       <ProjectReference Include="..\Dtos\Dtos.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Database.db" />
+      <Content Include="Database.db">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

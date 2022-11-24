@@ -4,9 +4,15 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddSession();
 
+var backendUrl = builder.Configuration["BackendUrl"];
+if (string.IsNullOrWhiteSpace(backendUrl))
+{
+    throw new Exception("BackendUrl is not defined.");
+}
+
 builder.Services.AddHttpClient("backend", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5008/");
+    client.BaseAddress = new Uri(backendUrl);
 });
 
 var app = builder.Build();
