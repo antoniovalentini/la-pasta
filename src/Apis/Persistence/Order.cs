@@ -49,5 +49,6 @@ public enum OrderStatus
 {
     InProgress,
     Shipped,
+    Received,
     Blocked,
 }

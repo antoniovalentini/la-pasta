@@ -27,9 +27,11 @@ public class OrdersController : ControllerBase
 
         return orders.Select(o =>
             new OrderDto(
-                o.OrderId, o.Total, o.Status.ToString(), o.PurchaseDate,
-                o.Items.Select(i =>
-                    new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
+                o.OrderId,
+                o.Total,
+                o.Status.ToString(),
+                o.PurchaseDate,
+                o.Items.Select(i => new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
     }
 
     [HttpPost]
@@ -42,16 +44,18 @@ public class OrdersController : ControllerBase
 
         var userId = await _userIdentityProvider.GetCurrentUserIdAsync();
         var orderId = Guid.NewGuid().ToString();
+
         var items = requestDto.Products
-            .Select(p => new OrderItem(p.Id, orderId, p.Quantity, _dbContext.Products.Single(p1 => p1.Id == p.Id).Price, _dbContext.Products.Single(p1 => p1.Id == p.Id).Description))
+            .Select(p =>
+            {
+                var actualProductPrice = _dbContext.Products.Single(p1 => p1.Id == p.Id).Price;
+                var description = _dbContext.Products.Single(p1 => p1.Id == p.Id).Description;
+                return new OrderItem(p.Id, orderId, p.Quantity, actualProductPrice, description);
+            })
             .ToList();
-        var order = new Order(
-            orderId,
-            userId,
-            items,
-            items.Sum(i => i.Quantity * long.Parse(i.ActualProductPrice)).ToString(),
-            OrderStatus.InProgress,
-            DateTime.UtcNow);
+
+        var total = items.Sum(i => i.Quantity * long.Parse(i.ActualProductPrice)).ToString();
+        var order = new Order(orderId, userId, items, total, OrderStatus.InProgress, DateTime.UtcNow);
 
         var result = await _dbContext.Orders.AddAsync(order);
         await _dbContext.SaveChangesAsync();

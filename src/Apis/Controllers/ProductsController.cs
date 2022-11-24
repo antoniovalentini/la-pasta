@@ -11,18 +11,11 @@ public class ProductsController : ControllerBase
 {
     private readonly ApiDbContext _dbContext;
 
-    public ProductsController(ApiDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    public ProductsController(ApiDbContext dbContext) => _dbContext = dbContext;
 
     [HttpGet]
-    public async Task<IEnumerable<FullProductDto>> GetProducts()
-    {
-        var orders = await _dbContext.Products.ToListAsync();
-
-        return orders.Select(x => x.ToDto());
-    }
+    public async Task<IEnumerable<FullProductDto>> GetProducts() =>
+        await _dbContext.Products.Select(x => x.ToDto()).ToListAsync();
 }
 
 public static class DtoExtensions
