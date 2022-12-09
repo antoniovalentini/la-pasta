@@ -6,32 +6,60 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="container">
+<div class="container pt-3">
 
     @if (Model.OrdersList is { Length: >0 })
     {
         <div class="row justify-content-center">
-            <div class="col-6">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var order in Model.OrdersList)
-                    {
-                        <tr>
-                            <td>@order.PurchaseDate</td>
-                            <td>&euro; @order.Total</td>
-                            <td>@order.Status</td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </div>
+
+            @foreach (var order in Model.OrdersList)
+            {
+                <div class="col-10" style="margin-bottom: 10px;">
+                    <div class="box-top">
+                        <div class="row">
+                            <div class="col-2 small">PURCHASE DATE</div>
+                            <div class="col-2 small">TOTAL</div>
+                            <div class="col-3 small">SENT TO</div>
+                            <div class="col-5 text-end small">ORDER # @order.OrderId</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">@order.PurchaseDate.ToString("d MMMM yyyy")</div>
+                            <div class="col-2">&euro; @order.Total</div>
+                            <div class="col-3">SOMEONE</div>
+                            <div class="col-5 text-end">Details - Receipt</div>
+                        </div>
+                    </div>
+                    <div class="box-mid">
+                        <div class="row">
+                            <div class="col-8">
+                                <h4 class="mb-4">@order.Status</h4>
+                                @if (order.Products is { Count: > 0})
+                                {
+                                    foreach (var item in order.Products)
+                                    {
+                                        <div class="row mb-3">
+                                            <div class="col-3 px-3"><img src="./images/placeholder_612x612.jpg" width="100%" alt="Product image"/></div>
+                                            <div class="col-9 ps-0">@item.Description</div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>No items found. Must be an error.</div>
+                                }
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-warning mb-2 form-control">Track shipping</button>
+                                <button class="btn btn-warning form-control">Issues with the order</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-bottom">
+                        <a href="#">Cancel order</a>
+                    </div>
+                </div>
+            }
         </div>
     }
     else
@@ -61,4 +89,8 @@
 
         Model.Message = "";
     }
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/orders_page.css" asp-append-version="true"/>
 }
