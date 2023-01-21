@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using LaPasta.Api.Dtos;
 
 namespace LaPasta.Api.Persistence;
 
@@ -25,30 +25,10 @@ public class Order
     public DateTime PurchaseDate { get; init; }
 }
 
-public class OrderItem
+public static class OrderExtensions
 {
-    public OrderItem(string productId, string orderId, int quantity, string actualProductPrice, string description)
-    {
-        ProductId = productId;
-        OrderId = orderId;
-        Quantity = quantity;
-        ActualProductPrice = actualProductPrice;
-        Description = description;
-    }
+    public static OrderDto ToDto(this Order o) =>
+        new(o.OrderId, o.Total, o.Status.ToString(), o.PurchaseDate, o.Items.ToDto());
 
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string Id { get; init; } = null!;
-    public string ProductId { get; init; }
-    public string OrderId { get; init; }
-    public string Description { get; init; }
-    public int Quantity { get; init; }
-    public string ActualProductPrice { get; init; }
-}
-
-public enum OrderStatus
-{
-    InProgress = 0,
-    Shipped = 1,
-    Delivered = 2,
-    Blocked = 3,
+    public static IEnumerable<OrderDto> ToDto(this IEnumerable<Order> orders) => orders.Select(o => o.ToDto());
 }
