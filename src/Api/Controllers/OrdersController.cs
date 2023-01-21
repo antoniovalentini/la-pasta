@@ -23,15 +23,13 @@ public class OrdersController : ControllerBase
     public async Task<IEnumerable<OrderDto>> GetOrders()
     {
         var userId = await _userIdentityProvider.GetCurrentUserIdAsync();
-        var orders = await _dbContext.Orders.Where(o => o.UserId == userId).Include(o => o.Items).ToListAsync();
 
-        return orders.Select(o =>
-            new OrderDto(
-                o.OrderId,
-                o.Total,
-                o.Status.ToString(),
-                o.PurchaseDate,
-                o.Items.Select(i => new OrderItemDto(i.ProductId, i.Description, i.Quantity, i.ActualProductPrice)).ToList()));
+        var orders = await _dbContext.Orders
+            .Where(o => o.UserId == userId)
+            .Include(o => o.Items)
+            .ToListAsync();
+
+        return orders.ToDto();
     }
 
     [HttpPost]

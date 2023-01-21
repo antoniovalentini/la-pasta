@@ -20,6 +20,6 @@ public class ProductsController : ControllerBase
 
 public static class DtoExtensions
 {
-    public static FullProductDto ToDto(this Product entity)
-        => new(entity.Id, entity.Name, entity.Description, entity.Price);
+    public static FullProductDto ToDto(this Product entity) =>
+        new(entity.Id, entity.Name, entity.Description, entity.Price);
 }
