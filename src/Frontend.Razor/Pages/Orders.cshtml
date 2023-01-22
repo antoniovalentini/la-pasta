@@ -33,7 +33,7 @@
                     <div class="box-mid">
                         <div class="row">
                             <div class="col-8">
-                                <h4 class="mb-4">@order.Status</h4>
+                                <h4 class="mb-4">Status: @order.Status</h4>
                                 @if (order.Products is { Count: > 0})
                                 {
                                     foreach (var item in order.Products)
