@@ -26,9 +26,9 @@ public static class DbSeed
         var orderId = Guid.NewGuid().ToString();
         var items = new List<OrderItem>
         {
-            new(Products[0].Id, orderId, Random.Shared.Next(0, 10), Products[0].Price, Products[0].Description),
-            new(Products[1].Id, orderId, Random.Shared.Next(0, 10), Products[1].Price, Products[1].Description),
-            new(Products[2].Id, orderId, Random.Shared.Next(0, 10), Products[2].Price, Products[2].Description),
+            new(Products[0].Id, orderId, Random.Shared.Next(0, 10), Products[0].Price, Products[0].Name, Products[0].Description),
+            new(Products[1].Id, orderId, Random.Shared.Next(0, 10), Products[1].Price, Products[1].Name, Products[1].Description),
+            new(Products[2].Id, orderId, Random.Shared.Next(0, 10), Products[2].Price, Products[2].Name, Products[2].Description),
         };
 
         var order = new Order(orderId, userId, items, "180,11", OrderStatus.InProgress, DateTime.UtcNow.AddDays(-300));
@@ -37,9 +37,9 @@ public static class DbSeed
         orderId = Guid.NewGuid().ToString();
         items = new List<OrderItem>
         {
-            new(Products[3].Id, orderId, Random.Shared.Next(0, 10), Products[3].Price, Products[3].Description),
-            new(Products[4].Id, orderId, Random.Shared.Next(0, 10), Products[4].Price, Products[4].Description),
-            new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price, Products[5].Description),
+            new(Products[3].Id, orderId, Random.Shared.Next(0, 10), Products[3].Price, Products[3].Name, Products[3].Description),
+            new(Products[4].Id, orderId, Random.Shared.Next(0, 10), Products[4].Price, Products[4].Name, Products[4].Description),
+            new(Products[5].Id, orderId, Random.Shared.Next(0, 10), Products[5].Price, Products[5].Name, Products[5].Description),
         };
         order = new Order(orderId, userId, items, "99,99", OrderStatus.Blocked, DateTime.UtcNow.AddDays(-800));
         await dbContext.Orders.AddAsync(order);

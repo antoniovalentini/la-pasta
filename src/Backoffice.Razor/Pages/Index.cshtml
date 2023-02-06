@@ -1,8 +1,11 @@
 ﻿@page
+@using System.Globalization
+@using Backoffice.Razor.Extensions
 @model Backoffice.Razor.Pages.Index
 
 @{
     ViewData["Title"] = "Index";
+    var orders = Model.Orders.OrderByDescending(o => o.PurchaseDate).ToArray();
 }
 
 <div class="pagetitle">
@@ -10,7 +13,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="#">Home</a>
             </li>
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
@@ -36,7 +39,7 @@
                     <i class="bi bi-cart"></i>
                 </div>
                 <div class="ps-3">
-                    <h6>145</h6>
+                    <h6>@orders.Length</h6>
                     <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -58,7 +61,7 @@
                     <i class="bi bi-currency-dollar"></i>
                 </div>
                 <div class="ps-3">
-                    <h6>$3,264</h6>
+                    <h6>€@(orders.Sum(o => decimal.Parse(o.Total, CultureInfo.GetCultureInfo("it-IT"))))</h6>
                     <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                 </div>
@@ -81,7 +84,7 @@
                     <i class="bi bi-people"></i>
                 </div>
                 <div class="ps-3">
-                    <h6>1244</h6>
+                    <h6>1</h6>
                     <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                 </div>
@@ -97,86 +100,45 @@
     <div class="card recent-sales overflow-auto">
 
         <div class="card-body">
-            <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+            <h5 class="card-title">Recent Orders <span>| Today</span></h5>
 
-            <table class="table table-borderless datatable">
+            @if (orders is { Length: >0 })
+            {
+                <table class="table table-borderless datatable">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
+                    <th scope="col">Products</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">
-                        <a href="#">#2457</a>
-                    </th>
-                    <td>Brandon Jacob</td>
-                    <td>
-                        <a href="#" class="text-primary">At praesentium minu</a>
-                    </td>
-                    <td>$64</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <a href="#">#2147</a>
-                    </th>
-                    <td>Bridie Kessler</td>
-                    <td>
-                        <a href="#" class="text-primary">Blanditiis dolor omnis similique</a>
-                    </td>
-                    <td>$47</td>
-                    <td>
-                        <span class="badge bg-warning">Pending</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <a href="#">#2049</a>
-                    </th>
-                    <td>Ashleigh Langosh</td>
-                    <td>
-                        <a href="#" class="text-primary">At recusandae consectetur</a>
-                    </td>
-                    <td>$147</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <a href="#">#2644</a>
-                    </th>
-                    <td>Angus Grady</td>
-                    <td>
-                        <a href="#" class="text-primar">Ut voluptatem id earum et</a>
-                    </td>
-                    <td>$67</td>
-                    <td>
-                        <span class="badge bg-danger">Rejected</span>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <a href="#">#2644</a>
-                    </th>
-                    <td>Raheem Lehner</td>
-                    <td>
-                        <a href="#" class="text-primary">Sunt similique distinctio</a>
-                    </td>
-                    <td>$165</td>
-                    <td>
-                        <span class="badge bg-success">Approved</span>
-                    </td>
-                </tr>
+                @foreach (var order in orders)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a href="#">#@order.OrderId[..8]</a>
+                        </th>
+                        <td>someone</td>
+                        <td>
+                            @(string.Join(", ", order.Products.Select(p => p.Name)))
+                        </td>
+                        <td>€@order.Total</td>
+                        <td>
+                            <span class="badge @order.Status.GetStatusBadge()">@order.Status</span>
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
+            }
+            else
+            {
+                <p>No orders.</p>
+            }
+
 
         </div>
 

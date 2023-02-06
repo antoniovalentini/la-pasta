@@ -10,4 +10,8 @@
       <Folder Include="wwwroot" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Api.Dtos\Api.Dtos.csproj" />
+    </ItemGroup>
+
 </Project>

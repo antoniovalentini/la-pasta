@@ -46,9 +46,11 @@ public class OrdersController : ControllerBase
         var items = requestDto.Products
             .Select(p =>
             {
-                var actualProductPrice = _dbContext.Products.Single(p1 => p1.Id == p.Id).Price;
-                var description = _dbContext.Products.Single(p1 => p1.Id == p.Id).Description;
-                return new OrderItem(p.Id, orderId, p.Quantity, actualProductPrice, description);
+                var product = _dbContext.Products.Single(p1 => p1.Id == p.Id);
+                var actualProductPrice = product.Price;
+                var name = product.Name;
+                var description = product.Description;
+                return new OrderItem(p.Id, orderId, p.Quantity, actualProductPrice, name, description);
             })
             .ToList();
 
