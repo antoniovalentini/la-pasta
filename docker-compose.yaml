@@ -21,6 +21,17 @@
       - ASPNETCORE_URLS=http://*:5147
       - BackendUrl=http://api:5008
 
+  backoffice:
+    build:
+      dockerfile: ./Backoffice.Razor.Dockerfile
+    ports:
+      - 5093:5093
+    networks:
+      - my-network
+    environment:
+      - ASPNETCORE_URLS=http://*:5093
+      - BackendUrl=http://api:5008
+
 networks:
   my-network:
     external: false
