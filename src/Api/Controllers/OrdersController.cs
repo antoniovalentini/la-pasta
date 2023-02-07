@@ -19,6 +19,18 @@ public class OrdersController : ControllerBase
         _userIdentityProvider = userIdentityProvider;
     }
 
+    [HttpGet("{id}")]
+    public async Task<OrderDto> GetOrders(string id)
+    {
+        var userId = await _userIdentityProvider.GetCurrentUserIdAsync();
+
+        var orders = await _dbContext.Orders
+            .Include(o => o.Items)
+            .FirstAsync(o => o.UserId == userId && o.OrderId == id);
+
+        return orders.ToDto();
+    }
+
     [HttpGet]
     public async Task<IEnumerable<OrderDto>> GetOrders()
     {

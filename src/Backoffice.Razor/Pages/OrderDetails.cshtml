@@ -1,0 +1,61 @@
+﻿@page
+@using System.Globalization
+@model Backoffice.Razor.Pages.OrderDetails
+
+@{
+    ViewData["Title"] = "Order Details";
+    var order = Model.Order ?? throw new Exception("Order is null in OrderDetails page.");
+}
+
+<div class="pagetitle">
+    <h1>Order Details</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Id: @order.OrderId</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Actions</h5>
+        <button type="button" class="btn btn-success">
+            <i class="bi bi-check-circle"></i>
+        </button>
+        <button type="button" class="btn btn-danger">
+            <i class="bi bi-exclamation-octagon"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Card with header and footer -->
+<div class="card">
+    <div class="card-header">Total: € @order.Total</div>
+    <div class="card-body">
+        <h5 class="card-title">Status: @order.Status</h5>
+        <p class="card-text">Expected delivery: Not yet available</p>
+    </div>
+    <div class="card-footer">
+        Purchased on: @order.PurchaseDate
+    </div>
+</div><!-- End Card with header and footer -->
+
+@foreach (var product in order.Products)
+{
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="assets/img/card.jpg" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name - x @product.Quantity</h5>
+                    <p class="card-text">@product.Description</p>
+                </div>
+                <div class="card-footer">
+                    Subtotal: € @(product.Quantity * decimal.Parse(product.ActualProductPrice, CultureInfo.GetCultureInfo("it-IT")))
+                </div>
+            </div>
+        </div>
+    </div>
+}
