@@ -20,7 +20,7 @@ public class OrderDetails : PageModel
         var response = await _httpClient.GetAsync($"api/Orders/{id}");
         if (!response.IsSuccessStatusCode)
         {
-            var ex1 = new Exception($"Unable to fetch order '{id}'");
+            var ex1 = new Exception($"Unable to fetch order '{id}' because API returned '{response.StatusCode}'");
             throw ex1;
         }
         var raw = await response.Content.ReadAsStringAsync();

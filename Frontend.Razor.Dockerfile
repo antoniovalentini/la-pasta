@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
 COPY ./src/Api.Dtos /src/Api.Dtos
 COPY ./src/Frontend.Razor /src/Frontend.Razor
+COPY *.props /
 
 WORKDIR /src/Frontend.Razor
 RUN ls
