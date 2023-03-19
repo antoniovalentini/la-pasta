@@ -19,14 +19,14 @@ Prerequisites:
 
 From the root folder, start all the containers by running:
 ```shell
-$ docker-compose up
+$ docker-compose up -d
 ```
 
 The frontend should be accessible at http://localhost:5147, while the backend at http://localhost:5008/.
 
 To remove containers, images and the new network, just run:
 ```shell
-$ docker-compose down --rmi all
+$ docker-compose down --rmi local
 ```
 
 ## Architecture and functionalities
