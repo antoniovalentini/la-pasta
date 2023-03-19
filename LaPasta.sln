@@ -8,7 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 		.gitignore = .gitignore
 		.editorconfig = .editorconfig
-		docker-compose.yaml = docker-compose.yaml
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
@@ -24,6 +23,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Dtos", "src\Api.Dtos\Api.Dtos.csproj", "{DBAB0738-46C0-4EA9-9086-18C816348948}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backoffice.Razor", "src\Backoffice.Razor\Backoffice.Razor.csproj", "{63F5ED16-D780-429D-97FE-34B2BEB38FD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dockerfiles", "Dockerfiles", "{E09F62A2-2390-408F-94DB-17F37BD7270E}"
+	ProjectSection(SolutionItems) = preProject
+		Api.Dockerfile = Api.Dockerfile
+		Backoffice.Razor.Dockerfile = Backoffice.Razor.Dockerfile
+		Frontend.Razor.Dockerfile = Frontend.Razor.Dockerfile
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

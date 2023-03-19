@@ -2,7 +2,7 @@
 
   api:
     build:
-      dockerfile: ./src/Api.Dockerfile
+      dockerfile: ./Api.Dockerfile
     ports:
       - 5008:5008
     networks:
@@ -12,7 +12,7 @@
 
   frontend:
     build:
-      dockerfile: ./src/Frontend.Razor.Dockerfile
+      dockerfile: ./Frontend.Razor.Dockerfile
     ports:
       - 5147:5147
     networks:
