@@ -17,9 +17,3 @@ public class ProductsController : ControllerBase
     public async Task<IEnumerable<FullProductDto>> GetProducts() =>
         await _dbContext.Products.Select(x => x.ToDto()).ToListAsync();
 }
-
-public static class DtoExtensions
-{
-    public static FullProductDto ToDto(this Product entity) =>
-        new(entity.Id, entity.Name, entity.Description, entity.Price);
-}
