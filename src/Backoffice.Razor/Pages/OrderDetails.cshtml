@@ -7,29 +7,25 @@
     var order = Model.Order ?? throw new Exception("Order is null in OrderDetails page.");
 }
 
-<div class="pagetitle">
-    <h1>Order Details</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">Id: @order.OrderId</li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
+<h6>Order @order.OrderId</h6>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Actions</h5>
-        <button type="button" class="btn btn-success">
-            <i class="bi bi-check-circle"></i>
-        </button>
-        <button type="button" class="btn btn-danger">
-            <i class="bi bi-exclamation-octagon"></i>
-        </button>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Actions</h5>
+                <button type="button" class="btn btn-success">
+                    Ship
+                </button>
+                <button type="button" class="btn btn-danger">
+                    Cancel
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Card with header and footer -->
-<div class="card">
+<div class="card mb-3">
     <div class="card-header">Total: € @order.Total</div>
     <div class="card-body">
         <h5 class="card-title">Status: @order.Status</h5>
@@ -38,14 +34,14 @@
     <div class="card-footer">
         Purchased on: @order.PurchaseDate
     </div>
-</div><!-- End Card with header and footer -->
+</div>
 
 @foreach (var product in order.Products)
 {
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="assets/img/card.jpg" class="img-fluid rounded-start" alt="...">
+                <img src="https://placehold.co/1600x900/f7dfaf/gray" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -53,7 +49,7 @@
                     <p class="card-text">@product.Description</p>
                 </div>
                 <div class="card-footer">
-                    Subtotal: € @(product.Quantity * decimal.Parse(product.ActualProductPrice, CultureInfo.GetCultureInfo("it-IT")))
+                    <small class="text-muted">Subtotal: € @(product.Quantity * decimal.Parse(product.ActualProductPrice, CultureInfo.GetCultureInfo("it-IT")))</small>
                 </div>
             </div>
         </div>

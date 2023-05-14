@@ -3,10 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 var backendUrl = builder.Configuration["BackendUrl"];
-if (string.IsNullOrWhiteSpace(backendUrl))
-{
-    throw new Exception("BackendUrl is not defined.");
-}
+ArgumentException.ThrowIfNullOrEmpty(backendUrl);
 
 builder.Services.AddHttpClient("backend", client =>
 {
@@ -15,9 +12,8 @@ builder.Services.AddHttpClient("backend", client =>
 
 var app = builder.Build();
 
-app.UseStaticFiles();
-
-app.UseRouting();
+app.UseStaticFiles()
+    .UseRouting();
 
 app.MapRazorPages();
 
