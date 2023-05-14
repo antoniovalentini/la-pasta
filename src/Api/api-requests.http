@@ -1,5 +1,5 @@
 ﻿### Orders
-GET https://localhost:7008/api/orders
+GET http://localhost:5008/api/orders
 
 ### Products
-GET https://localhost:7008/api/products
+GET http://localhost:5008/api/products

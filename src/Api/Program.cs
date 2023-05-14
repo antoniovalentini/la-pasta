@@ -4,23 +4,27 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApiDbContext>(options => options.UseSqlite("Data Source=Database.db"));
-
-builder.Services.AddSingleton<IUserIdentityProvider, TestUserIdentityProvider>();
-
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks();
+
+builder.Services
+    .AddDbContext<ApiDbContext>(options =>
+    {
+        var connectionString = builder.Configuration["DbConnectionString"];
+        ArgumentException.ThrowIfNullOrEmpty(connectionString);
+        options.UseSqlite(connectionString);
+    })
+    .AddSingleton<IUserIdentityProvider, TestUserIdentityProvider>()
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen()
+    .AddHealthChecks();
 
 var app = builder.Build();
 
 app.MapHealthChecks("/health");
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseAuthorization();
+app.UseSwagger()
+    .UseSwaggerUI()
+    .UseAuthorization();
 
 app.MapControllers();
 
