@@ -8,9 +8,9 @@
         <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.5" />
         <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
         <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.1" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
         <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-        <PackageVersion Include="xunit" Version="2.4.2" />
+        <PackageVersion Include="xunit" Version="2.5.0" />
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.0" />
     </ItemGroup>
 </Project>
